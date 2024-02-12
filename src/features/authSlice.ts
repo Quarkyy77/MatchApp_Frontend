@@ -36,11 +36,17 @@ export const authSlice = createSlice({
         })
       );
     },
+    logout: (state) => {
+      localStorage.clear();
+      state.name = null;
+      state.userAuthToken = null;
+      state.userRefreshToken = null;
+    },
   },
 });
 
 export const selectAuth = (state: RootState) => state.auth;
 
-export const { setUser } = authSlice.actions;
+export const { setUser, logout } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { MDBInput, MDBRadio, MDBBtnGroup } from "mdb-react-ui-kit";
-import { useLoginUserMutation } from "../service/authApi";
+import { MDBInput } from "mdb-react-ui-kit";
+import {
+  useLoginUserMutation,
+  useRegisterUserMutation,
+} from "../service/authApi";
 import { toast } from "react-toastify";
 import { useAppDispatch } from "../app/hooks";
 import { setUser } from "../features/authSlice";
@@ -30,13 +33,32 @@ const Auth = () => {
       isSuccess: isLoginSuccess,
     },
   ] = useLoginUserMutation();
+
+  const [
+    registerUser,
+    {
+      data: RegisterData,
+      error: RegisterError,
+      isError: isRegisterError,
+      isSuccess: isRegisterSuccess,
+    },
+  ] = useRegisterUserMutation();
   const navigate = useNavigate();
+
   const handleChange = (e: any) => {
     setFormValue({
       ...formValue,
       [e.target.name]: e.target.value,
     });
     e.preventDefault();
+  };
+  const handleRegister = async () => {
+    if (password !== confirmPassword) {
+      return toast.error("Passwords don not match");
+    }
+    if (Name && email && password && gender) {
+      await registerUser({ Name, email, password, gender });
+    }
   };
 
   const handleLogin = async () => {
@@ -51,12 +73,23 @@ const Auth = () => {
         setUser({
           name: LoginData.user.name,
           userAuthToken: LoginData.userAuthToken,
-          userRefreshToken: LoginData.userRefreshToke,
+          userRefreshToken: LoginData.userRefreshToken,
         })
       );
       navigate("/dashboard");
     }
-  });
+    if (isRegisterSuccess) {
+      toast.success("Successfull regstered user");
+      dispatch(
+        setUser({
+          name: RegisterData.user.name,
+          userAuthToken: RegisterData.userAuthToken,
+          userRefreshToken: RegisterData.userRefreshToken,
+        })
+      );
+      navigate("/dashboard");
+    }
+  }, [isLoginSuccess, isRegisterSuccess]);
   return (
     <section className="vh-100 gradient-custom">
       <div className="container py-4 h-100">
@@ -144,7 +177,8 @@ const Auth = () => {
                   ) : (
                     <button
                       className="btn btn-outline-light btn-lg px-5"
-                      type="button">
+                      type="button"
+                      onClick={() => handleRegister()}>
                       Register
                     </button>
                   )}
