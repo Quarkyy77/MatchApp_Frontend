@@ -54,7 +54,7 @@ const Auth = () => {
   };
   const handleRegister = async () => {
     if (password !== confirmPassword) {
-      return toast.error("Passwords don not match");
+      return toast.error("Passwords do not match");
     }
     if (Name && email && password && gender) {
       await registerUser({ Name, email, password, gender });

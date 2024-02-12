@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import { useAppDispatch } from "./app/hooks";
 import { useEffect } from "react";
 import { setUser } from "./features/authSlice";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -23,7 +24,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/auth" replace />} />
           <Route path="/auth" element={<Auth />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
