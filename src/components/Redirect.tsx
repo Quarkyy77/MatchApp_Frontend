@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { MDBModal, MDBModalDialog, MDBModalContent } from "mdb-react-ui-kit";
 const Redirect = () => {
-  const [count, setCount] = useState(5);
+  const [count, setCount] = useState(4);
   const navigate = useNavigate();
   useEffect(() => {
     const interval = setInterval(() => {
@@ -10,20 +10,13 @@ const Redirect = () => {
     }, 1000);
 
     count === 0 && navigate("/auth");
+
     return () => clearInterval(interval);
   }, [count, navigate]);
 
   return (
     <div className="vh-100 gradient-custom">
-      <MDBModal show={true}>
-        <MDBModalDialog centered>
-          <MDBModalContent>
-            <p className="mt-3">
-              Redirecting you to homepage in {count} seconds
-            </p>
-          </MDBModalContent>
-        </MDBModalDialog>
-      </MDBModal>
+      <h2 className="mt-7">Redirecting you to homepage in {count} seconds</h2>
     </div>
   );
 };

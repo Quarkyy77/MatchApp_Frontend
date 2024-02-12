@@ -97,7 +97,7 @@ const Auth = () => {
     }
 
     if (isRegisterError) {
-      toast.error((LoginError as any).data.message);
+      toast.error((RegisterError as any).data.message);
     }
   }, [isLoginError, isRegisterError]);
   return (
