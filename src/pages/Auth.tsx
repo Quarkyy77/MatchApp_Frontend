@@ -90,6 +90,16 @@ const Auth = () => {
       navigate("/dashboard");
     }
   }, [isLoginSuccess, isRegisterSuccess]);
+
+  useEffect(() => {
+    if (isLoginError) {
+      toast.error((LoginError as any).data.message);
+    }
+
+    if (isRegisterError) {
+      toast.error((LoginError as any).data.message);
+    }
+  }, [isLoginError, isRegisterError]);
   return (
     <section className="vh-100 gradient-custom">
       <div className="container py-4 h-100">
