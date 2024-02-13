@@ -57,7 +57,7 @@ const Auth = () => {
       return toast.error("Passwords do not match");
     }
     if (Name && email && password && gender) {
-      await registerUser({ Name, email, password, gender });
+      await registerUser({ Name  , email, password, gender });
     }
   };
 
@@ -71,7 +71,7 @@ const Auth = () => {
       toast.success("Login Successful");
       dispatch(
         setUser({
-          name: LoginData.user.name,
+          name: LoginData.user.Name,
           userAuthToken: LoginData.userAuthToken,
           userRefreshToken: LoginData.userRefreshToken,
         })
@@ -80,14 +80,7 @@ const Auth = () => {
     }
     if (isRegisterSuccess) {
       toast.success("Successfull regstered user");
-      dispatch(
-        setUser({
-          name: RegisterData.user.name,
-          userAuthToken: RegisterData.userAuthToken,
-          userRefreshToken: RegisterData.userRefreshToken,
-        })
-      );
-      navigate("/dashboard");
+      navigate("/login");
     }
   }, [isLoginSuccess, isRegisterSuccess]);
 

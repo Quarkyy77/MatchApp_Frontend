@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { MDBModal, MDBModalDialog, MDBModalContent } from "mdb-react-ui-kit";
 const Redirect = () => {
   const [count, setCount] = useState(4);
   const navigate = useNavigate();
