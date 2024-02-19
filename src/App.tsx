@@ -4,10 +4,10 @@ import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { useAppDispatch } from "./app/hooks";
+import { useAppDispatch } from "./hooks/hooks";
 import { useEffect } from "react";
 import { setUser } from "./features/authSlice";
-import PrivateRoute from "./components/PrivateRoute";
+import PrivateRoute from "./Layouts/PrivateRoute";
 
 function App() {
   const dispatch = useAppDispatch();

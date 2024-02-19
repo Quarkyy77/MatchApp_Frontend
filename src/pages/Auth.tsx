@@ -6,7 +6,7 @@ import {
   useRegisterUserMutation,
 } from "../service/authApi";
 import { toast } from "react-toastify";
-import { useAppDispatch } from "../app/hooks";
+import { useAppDispatch } from "../hooks/hooks";
 import { setUser } from "../features/authSlice";
 
 const initialState = {
@@ -57,7 +57,7 @@ const Auth = () => {
       return toast.error("Passwords do not match");
     }
     if (Name && email && password && gender) {
-      await registerUser({ Name  , email, password, gender });
+      await registerUser({ Name, email, password, gender });
     }
   };
 

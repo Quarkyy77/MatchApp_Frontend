@@ -1,7 +1,8 @@
 import { toast } from "react-toastify";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { logout, selectAuth } from "../features/authSlice";
 import { useNavigate } from "react-router-dom";
+import HeaderAndSidebar from "../components/HeaderAndSideBar";
 
 const Dashboard = () => {
   const { name } = useAppSelector(selectAuth);
@@ -16,6 +17,7 @@ const Dashboard = () => {
 
   return (
     <section className="vh-100 gradient-custom">
+      <HeaderAndSidebar />
       <div className="container py-4 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className=" col-12 col-md-8 col-lg-6 col-xl-5">
